@@ -6,6 +6,7 @@ module.exports = {
 	pathPrefix: '/gatsby-advanced-starter', // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
 	siteDescription: 'A GatsbyJS stater with Advanced design in mind.', // Website description used for RSS feeds/meta description tag.
 	googleAnalyticsID: 'UA-47311644-5', // GA tracking ID.
+	googleMapsAPI: '',
 	postDefaultCategoryID: 'Tech', // Default category for posts.
 	copyright: 'Copyright © 2017. Advanced User', // Copyright string for the footer of the website and RSS feed.
 };
