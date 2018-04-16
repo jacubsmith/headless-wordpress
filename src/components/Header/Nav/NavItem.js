@@ -12,10 +12,6 @@ class NavItem extends Component {
 				<Link to={navItem.object_slug} className="header-nav__link">
 					{navItem.title}
 				</Link>
-				{navItem.wordpress_children !== null ?
-					<NavDropdown data={navItem.wordpress_children} key={navItem.wordpress_id} />
-					: ''
-				}
 			</li>
 		);
 	}
@@ -30,3 +26,8 @@ NavItem.propType = {
 
 
 export default NavItem;
+
+// {navItem.wordpress_children !== null ?
+// 	<NavDropdown data={navItem.wordpress_children} key={navItem.wordpress_id} />
+// 	: ''
+// }
