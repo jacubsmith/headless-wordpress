@@ -1,0 +1,56 @@
+$module: 'alert';
+
+.#{$module} {
+	position: fixed;
+	bottom: em(20);
+	right: em(20);
+	z-index: 20;
+	padding: em(20) em(60) em(20) em(30);
+	max-width: em(470);
+	line-height: 1.2;
+
+	@include bp(tab-l) {
+		top: em(100);
+		bottom: auto;
+		right: 0;
+		min-width: 100%;
+	}
+
+	&--success {
+		@extend .#{$module};
+		background: rgba($color3,0.9);
+	}
+
+	&--error {
+		@extend .#{$module};
+		background: rgba($color5,0.9);
+	}
+
+	&__close {
+		cursor: pointer;
+		position: absolute;
+		display: block;
+		width: em(25);
+		height: em(25);
+		right: em(20);
+		
+		&:before, &:after {
+			content: '';
+			background: white;
+			height: em(2);
+			width: em(30);
+			display: block;
+			position: absolute;
+			top: 50%;
+		}
+	
+		&:before {
+			transform: rotate(45deg);
+		}
+	
+		&:after {
+			transform: rotate(-45deg);
+		}
+	}
+
+}

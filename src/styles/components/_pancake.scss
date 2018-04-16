@@ -1,0 +1,52 @@
+$module: 			'pancake';
+
+.#{$module}{
+	height: em(50);
+	width: em(50);
+	z-index: 10;
+	display: none;
+
+	@include bp(tab-m) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__line {
+		position: relative;
+		width: em(30);
+		height: em(3);
+		background-color: white;
+		transition: transform 0.2s 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			width: em(30);
+			height: em(3);
+			background-color: inherit;
+			transition: transform 0.2s cubic-bezier(0.77, 0, 0.175, 1);
+		}
+
+		&:before {
+			transform: translateY(em(-7));
+		}
+
+		&:after {
+			transform: translateY(em(7));
+		}
+		
+		.open & {
+			&:before, &::after {
+				transform: translateY(em(0));
+			}
+
+			transform: rotate(-45deg);
+
+			&:after {
+				transform: rotate(90deg);
+			}
+		}
+	}
+
+}
