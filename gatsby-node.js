@@ -41,11 +41,20 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 				}
 
 				// Create Page pages.
-				const pageTemplate = path.resolve('./src/templates/Page.jsx');
 				// We want to create a detailed page for each
 				// page node. We'll just use the WordPress Slug for the slug.
 				// The Page ID is prefixed with 'PAGE_'
 				_.each(result.data.allWordpressPage.edges, (edge) => {
+					// Render Page Templates from wordpress to pages in Gatsby
+					// Useful for defined pages, home, contact, etc.
+					const { template } = edge.node;
+
+					// Template path is the folder where we are storing page templates on Wordpress
+					// Will use the template and generate it in pages or default to page template
+					const templatePath = template.replace(/\.[^\.]+$/, '.jsx') || 'templates/page.jsx';
+
+					const pageTemplate = path.resolve(`./src/${templatePath}`);
+
 					// Gatsby uses Redux to manage its internal state.
 					// Plugins and sites can use functions like "createPage"
 					// to interact with Gatsby.
@@ -85,7 +94,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 						console.log(result.errors);
 						reject(result.errors);
 					}
-					const movieTemplate = path.resolve('./src/templates/Movie.jsx');
+					const movieTemplate = path.resolve('./src/templates/movie.jsx');
 					// We want to create a detailed page for each
 					// post node. We'll just use the WordPress Slug for the slug.
 					// The Post ID is prefixed with 'POST_'
@@ -127,7 +136,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 						reject(result.errors);
 					}
 					const tags = [];
-					const postTemplate = path.resolve('./src/templates/Post.jsx');
+					const postTemplate = path.resolve('./src/templates/post.jsx');
 					// We want to create a detailed page for each
 					// post node. We'll just use the Wordpress Slug for the slug.
 					// The Post ID is prefixed with 'POST_'
@@ -148,7 +157,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 					// ==== END POSTS ====
 
 					// Create pages for each unique tag and category
-					const tagsTemplate = path.resolve('./src/templates/Tag.jsx');
+					const tagsTemplate = path.resolve('./src/templates/tag.jsx');
 					const tagsSet = new Set(tags);
 					tagsSet.forEach((tag) => {
 						createPage({

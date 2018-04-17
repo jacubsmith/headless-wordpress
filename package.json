@@ -5,6 +5,7 @@
   "author": "Jake Smith <jakesmith1922@googlemail.com>",
   "dependencies": {
     "autoprefixer": "^8.2.0",
+    "bling": "^0.11.10",
     "browserslist": "^3.2.4",
     "gatsby": "^1.9.246",
     "gatsby-image": "^1.0.43",
@@ -17,7 +18,10 @@
     "gatsby-source-wordpress": "^2.0.74",
     "gatsby-transformer-remark": "^1.7.39",
     "gatsby-transformer-sharp": "^1.6.22",
+    "google-maps-react": "^2.0.0",
     "prop-types": "^15.6.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "react-helmet": "^5.2.0",
     "react-share": "^2.1.1",
     "styled-components": "^3.2.5"

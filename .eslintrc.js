@@ -34,6 +34,8 @@ module.exports = {
 		'no-return-assign': 0,
 		'react/prefer-stateless-function': 0,
 		'react/prop-types': 0,
-		'no-underscore-dangle': 0
+		'no-underscore-dangle': 0,
+		'class-methods-use-this': 0,
+		'forbid-prop-types': 0
 	},
 };

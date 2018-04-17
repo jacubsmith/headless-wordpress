@@ -13,7 +13,7 @@ class Index extends React.Component {
 				<SEO postEdges={postEdges} />
 
 				<div className="content__inner">
-					<h1>Gatsby + Wordpress Blog</h1>
+					<h1>Home page being rendered</h1>
 				</div>
 			</div>
 		);
@@ -54,22 +54,5 @@ export const pageQuery = graphql`
         }
       }
     }
-		wordpressWpApiMenusMenusItems {
-			name
-			items {
-				wordpress_id
-				order
-				title
-				url
-				object_slug
-				wordpress_children {
-					wordpress_id
-					order
-					title
-					url
-					object_slug
-				}
-			}
-		}
 	}
 `;

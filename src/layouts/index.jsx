@@ -80,21 +80,4 @@ export const query = graphql`
 		}
 	}
 `;
-// const TemplateWrapper = ({ children, data }) => (
-// 	<div>
-// 		<Helmet
-// 			title="Headless Wordpress CMS"
-// 			meta={[
-// 				{ name: 'description', content: 'Simple headless wordpress CMS to use with Gatsby JS' },
-// 			]}
-// 		/>
-// 		<div className="content__wrapper">{children()}</div>
-// 	</div>
-// );
-
-// TemplateWrapper.propTypes = {
-// 	children: PropTypes.func,
-// };
-
-// export default TemplateWrapper;
 
