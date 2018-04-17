@@ -41,6 +41,7 @@ module.exports = {
 				// This feature is untested for sites hosted on Wordpress.com.
 				// Defaults to true.
 				useACF: true,
+				verbose: true,
 			},
 		},
 	],

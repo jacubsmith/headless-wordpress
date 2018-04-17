@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import PropTypes from 'prop-types';
-import config from '../../../data/SiteConfig';
+import { googleMapsAPI } from '../../../../data/SiteConfig';
 
-class GoogleMapContainer extends Component {
-	// getCenter() {
-	// 	const { lat, lng } = this.props.page.acf.maps;
-	// 	return {
-	// 		lat,
-	// 		lng,
-	// 	};
-	// }
-
+class WordPressAcfMap extends Component {
 	render() {
 		const mapStyles = {
 			position: 'relative',
@@ -22,7 +14,7 @@ class GoogleMapContainer extends Component {
 			return <div>Loading...</div>;
 		}
 
-		const { lat, lng } = this.props.initialCenter;
+		const { lat, lng } = this.props.item.map;
 
 		return (
 			<div style={mapStyles}>
@@ -49,5 +41,6 @@ class GoogleMapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-	apiKey: config.googleMapsAPI,
-})(GoogleMapContainer);
+	apiKey: googleMapsAPI,
+})(WordPressAcfMap);
+

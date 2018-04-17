@@ -8,6 +8,6 @@ module.exports = {
 	googleMapsAPI: 'AIzaSyCBuhRGo10RKonSPoRw0L-93jJ2npEWtFs',
 	postDefaultCategoryID: 'Tech', // Default category for posts.
 	copyright: 'Copyright © 2018. Jake Smith', // Copyright string for the footer of the website and RSS feed.
+	pathPrefix: '/', // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
 };
 
-// pathPrefix: '/gatsby-advanced-starter', // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
