@@ -13,39 +13,38 @@ export default class Index extends Component {
 
 		// const page = this.props.data.wordpressPage;
 		return (
-			<div>
-				<Helmet title={config.siteTitle} />
-
-				<div className="content__inner">
-					<h1>Home page being rendered</h1>
-					{page.acf !== null && page.acf.flexible_content_page !== null ?
-						page.acf.flexible_content_page.map((item) => {
-							switch (item.__typename) {
-							case 'WordPressAcf_blog_posts':
-								return <PostListing postEdges={this.props.data.allWordpressPost.edges} key={item.id} />;
-
-							case 'WordPressAcf_text_block':
-								return <WordPressAcfTextBlock item={item} key={item.id} />;
-
-							case 'WordPressAcf_wysiwyg':
-								return <WordPressAcfWysiwyg item={item} key={item.id} />;
-
-							case 'WordPressAcf_map':
-								return <WordPressAcfMap item={item} key={item.id} />;
-
-							case 'WordPressAcf_seo':
-								return <SEO postPath={page.slug} post={item} postSEO key={item.id} />;
-
-							default:
-								return null;
-							}
-						})
-						: ''}
-				</div>
-			</div>
+			<div />
 		);
 	}
 }
+// <Helmet title={config.siteTitle} />
+
+// <div className="content__inner">
+// 	<h1>Home page being rendered</h1>
+// 	{page.acf !== null && page.acf.flexible_content_page !== null ?
+// 		page.acf.flexible_content_page.map((item) => {
+// 			switch (item.__typename) {
+// 			case 'WordPressAcf_blog_posts':
+// 				return <PostListing postEdges={this.props.data.allWordpressPost.edges} key={item.id} />;
+
+// 			case 'WordPressAcf_text_block':
+// 				return <WordPressAcfTextBlock item={item} key={item.id} />;
+
+// 			case 'WordPressAcf_wysiwyg':
+// 				return <WordPressAcfWysiwyg item={item} key={item.id} />;
+
+// 			case 'WordPressAcf_map':
+// 				return <WordPressAcfMap item={item} key={item.id} />;
+
+// 			case 'WordPressAcf_seo':
+// 				return <SEO postPath={page.slug} post={item} postSEO key={item.id} />;
+
+// 			default:
+// 				return null;
+// 			}
+// 		})
+// 		: ''}
+// </div>
 
 /* eslint no-undef: "off" */
 // export const indexPageQuery = graphql`
