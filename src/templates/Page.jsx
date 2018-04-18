@@ -47,6 +47,8 @@ export default class Page extends Component {
 					/>
 					{page.acf !== null && page.acf.flexible_content_page !== null ?
 						page.acf.flexible_content_page.map((item) => {
+							console.log(item);
+
 							switch (item.__typename) {
 							case 'WordPressAcf_blog_posts':
 								return <PostListing postEdges={this.props.data.allWordpressPost.edges} />;
@@ -61,7 +63,7 @@ export default class Page extends Component {
 								return <WordPressAcfMap item={item} />;
 
 							case 'WordPressAcf_seo':
-								return <SEO postPath={page.slug} postNode={item} postSEO />;
+								return <SEO postPath={page.slug} post={item} postSEO />;
 
 							default:
 								return null;
@@ -69,7 +71,7 @@ export default class Page extends Component {
 						})
 						: ''}
 					<div className="post-meta">
-						<SocialLinks postPath={slug} postNode={pageNode} />
+						<SocialLinks post={slug} postNode={pageNode} />
 					</div>
 				</div>
 			</div>
@@ -104,17 +106,6 @@ export const pageQuery = graphql`
 					}
 					... on WordPressAcf_seo {
 						seo_title
-						seo_keywords
-						seo_description
-						seo_image {
-							localFile {
-								childImageSharp {
-									sizes(maxWidth: 1280) {
-										...GatsbyImageSharpSizes
-									}
-								}
-							}
-						}
 					}
 					... on WordPressAcf_map {
 						map {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 import config from '../../data/SiteConfig';
 import '../styles/main.scss';
 
@@ -54,6 +55,7 @@ export default class MainLayout extends React.Component {
 				<div className="content__wrapper">
 					{children()}
 				</div>
+				<Footer />
 			</div>
 		);
 	}

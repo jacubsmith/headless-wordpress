@@ -1,5 +1,22 @@
 $module: 'footer';
 
 .#{$module} {
- 
+	background: $color2;
+	
+	&__inner {
+		font-family: $ffSecondary;
+		font-weight: $fwBold;
+		color: white;
+		max-width: em($pageWidth);
+		width: 100%;
+		margin: 0 auto;
+		height: em(100);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		@include bp(desk-l){
+			padding: 0 em(15); 
+		}
+	}
 }

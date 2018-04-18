@@ -7,8 +7,9 @@ import config from '../../data/SiteConfig';
 
 export default class PostTemplate extends React.Component {
 	render() {
-		const { slug } = this.props.data.wordpressPost.slug;
-		const postNode = this.props.data.wordpressPost;
+		console.log(this);
+
+		const { slug } = this.props.data.wordpressPost;
 		const post = this.props.data.wordpressPost;
 
 		if (!post.id) {
@@ -23,13 +24,13 @@ export default class PostTemplate extends React.Component {
 				<Helmet>
 					<title>{`${post.title} | ${config.siteTitle}`}</title>
 				</Helmet>
-				<SEO postPath={slug} postNode={postNode} postSEO />
+				<SEO postPath={slug} post={post} postSEO />
 				<div>
 					<h1>{post.title}</h1>
-					<div dangerouslySetInnerHTML={{ __html: postNode.content }} />
+					<div dangerouslySetInnerHTML={{ __html: post.content }} />
 					<div className="post-meta">
 						{post.tags !== null ? <PostTags tags={post.tags} /> : ''}
-						<SocialLinks postPath={slug} postNode={postNode} />
+						<SocialLinks postPath={slug} post={post} />
 					</div>
 				</div>
 			</div>
@@ -46,6 +47,13 @@ export const postQuery = graphql`
  			slug
 			tags {
 				name
+			}
+			acf {
+				flexible_content_post {
+					... on WordPressAcf_seo {
+						seo_title
+					}
+				}
 			}
 		}
   }

@@ -4,16 +4,17 @@ import config from '../../../data/SiteConfig';
 
 class SEO extends Component {
 	render() {
-		const { postNode, postPath, postSEO } = this.props;
+		console.log(this);
+
+		const { post, postPath, postSEO } = this.props;
 		let title;
 		let description;
 		let image;
 		let postURL;
 		if (postSEO) {
-			const postMeta = postNode;
-			title = postMeta.seo_title;
-			description = postMeta.seo_description;
-			image = postMeta.seo_image.localFile.childImageSharp.sizes.src;
+			title = post.seo_title || config.siteTitle;
+			description = post.seo_description || config.siteDescription;
+			image = post.seo_image !== null ? post.seo_image.localFile.childImageSharp.sizes.src : config.siteLogo;
 			postURL = config.siteUrl + config.pathPrefix + postPath;
 		} else {
 			title = config.siteTitle;

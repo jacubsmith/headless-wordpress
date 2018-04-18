@@ -27,8 +27,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 								id
                 slug
                 status
-                template
+								wordpress_id
 							}
+						}
+					}
+					wordpressAcfOptions {
+						home_page {
+							wordpress_id
 						}
 					}
         }
@@ -40,19 +45,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 					reject(result.errors);
 				}
 
+
+				const homeID = result.data.wordpressAcfOptions.home_page.wordpress_id;
 				// Create Page pages.
 				// We want to create a detailed page for each
 				// page node. We'll just use the WordPress Slug for the slug.
 				// The Page ID is prefixed with 'PAGE_'
 				_.each(result.data.allWordpressPage.edges, (edge) => {
-					// Render Page Templates from wordpress to pages in Gatsby
-					// Useful for defined pages, home, contact, etc.
-					const { template } = edge.node;
-
-					// Template path is the folder where we are storing page templates on Wordpress
-					// Will use the template and generate it in pages or default to page template
-					const templatePath = template.replace(/\.[^\.]+$/, '.jsx') || 'templates/page.jsx';
-
+					// Render index as home page if it has the right wordpress_id as set in options
+					const templatePath = edge.node.wordpress_id === homeID ? 'pages/home.jsx' : 'templates/page.jsx';
 					const pageTemplate = path.resolve(`./src/${templatePath}`);
 
 					// Gatsby uses Redux to manage its internal state.

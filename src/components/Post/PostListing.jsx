@@ -32,7 +32,7 @@ class PostListing extends Component {
 	render() {
 		const postList = this.getPostList();
 		return (
-			<div>
+			<div className="blog-listings">
 				{
 					postList.map(post => (
 						<Link to={post.path} className="blog-listings__listing" key={post.id}>
