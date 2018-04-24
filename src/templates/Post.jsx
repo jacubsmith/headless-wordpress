@@ -7,10 +7,9 @@ import config from '../../data/SiteConfig';
 
 export default class PostTemplate extends React.Component {
 	render() {
-		console.log(this);
-
 		const { slug } = this.props.data.wordpressPost;
 		const post = this.props.data.wordpressPost;
+		console.log(slug);
 
 		if (!post.id) {
 			post.id = slug;
@@ -30,7 +29,7 @@ export default class PostTemplate extends React.Component {
 					<div dangerouslySetInnerHTML={{ __html: post.content }} />
 					<div className="post-meta">
 						{post.tags !== null ? <PostTags tags={post.tags} /> : ''}
-						<SocialLinks postPath={slug} post={post} />
+						<SocialLinks postNode={post} postPath={slug} />
 					</div>
 				</div>
 			</div>
@@ -42,19 +41,19 @@ export default class PostTemplate extends React.Component {
 export const postQuery = graphql`
   query currentpostQuery($id: String!) {
     wordpressPost(id: { eq: $id }) {
- 			title
- 			content
- 			slug
-			tags {
-				name
-			}
-			acf {
-				flexible_content_post {
-					... on WordPressAcf_seo {
-						seo_title
-					}
-				}
-			}
-		}
+      title
+      content
+      slug
+      tags {
+        name
+      }
+      acf {
+        flexible_content_post {
+          ... on WordPressAcf_seo {
+            seo_title
+          }
+        }
+      }
+    }
   }
 `;

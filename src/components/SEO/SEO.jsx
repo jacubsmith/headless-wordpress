@@ -4,17 +4,18 @@ import config from '../../../data/SiteConfig';
 
 class SEO extends Component {
 	render() {
-		console.log(this);
-
 		const { post, postPath, postSEO } = this.props;
-		let title;
-		let description;
-		let image;
+		let title = post.seo_title || null;
+		let description = post.seo_description || null;
+		let image = post.seo_image || null;
+
 		let postURL;
 		if (postSEO) {
-			title = post.seo_title || config.siteTitle;
-			description = post.seo_description || config.siteDescription;
-			image = post.seo_image !== null ? post.seo_image.localFile.childImageSharp.sizes.src : config.siteLogo;
+			title === null ? config.siteTitle : title;
+			description === null ? config.siteDescription : description;
+			image === null
+				? config.siteLogo
+				: post.seo_image.localFile.childImageSharp.sizes.src;
 			postURL = config.siteUrl + config.pathPrefix + postPath;
 		} else {
 			title = config.siteTitle;
@@ -90,7 +91,7 @@ class SEO extends Component {
 				{/* Twitter Card tags */}
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta
-					name="twitter:creator"
+	name="twitter:creator"
 					content={config.userTwitter ? config.userTwitter : ''}
 				/>
 				<meta name="twitter:title" content={title} />

@@ -21,21 +21,21 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 		graphql(
 			`
         {
-					allWordpressPage {
-						edges {
-							node {
-								id
+          allWordpressPage {
+            edges {
+              node {
+                id
                 slug
                 status
-								wordpress_id
-							}
-						}
-					}
-					wordpressAcfOptions {
-						home_page {
-							wordpress_id
-						}
-					}
+                wordpress_id
+              }
+            }
+          }
+          wordpressAcfOptions {
+            home_page {
+              wordpress_id
+            }
+          }
         }
       `,
 		)
@@ -45,7 +45,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 					reject(result.errors);
 				}
 
-
 				const homeID = result.data.wordpressAcfOptions.home_page.wordpress_id;
 				// Create Page pages.
 				// We want to create a detailed page for each
@@ -53,8 +52,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 				// The Page ID is prefixed with 'PAGE_'
 				_.each(result.data.allWordpressPage.edges, (edge) => {
 					// Render index as home page if it has the right wordpress_id as set in options
-					const templatePath = edge.node.wordpress_id === homeID ? 'pages/home.jsx' : 'templates/page.jsx';
+					// const templatePath =
+					//   edge.node.wordpress_id === homeID
+					//   	? 'pages/index.jsx'
+					//   	: 'templates/page.jsx';
+					const templatePath = 'templates/page.jsx';
+
 					const pageTemplate = path.resolve(`./src/${templatePath}`);
+					console.log(pageTemplate);
 
 					// Gatsby uses Redux to manage its internal state.
 					// Plugins and sites can use functions like "createPage"
@@ -77,19 +82,19 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 			.then(() => {
 				graphql(
 					`
-					{
-						allWordpressWpFilms {
-							edges{
-								node {
-									title
-									slug
-									type
-									id
-								}
-							}
-						}
-					}
-				`,
+            {
+              allWordpressWpFilms {
+                edges {
+                  node {
+                    title
+                    slug
+                    type
+                    id
+                  }
+                }
+              }
+            }
+          `,
 				).then((result) => {
 					if (result.errors) {
 						console.log(result.errors);
@@ -122,8 +127,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     id
                     slug
                     status
-										format
-										tags {
+                    format
+                    tags {
                       name
                     }
                   }

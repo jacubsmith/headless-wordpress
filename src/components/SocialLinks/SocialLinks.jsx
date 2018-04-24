@@ -22,6 +22,8 @@ import config from '../../../data/SiteConfig';
 class SocialLinks extends Component {
 	render() {
 		const { postNode, postPath, mobile } = this.props;
+		console.log(postNode, postPath, mobile);
+
 		const post = postNode;
 		const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
 		const url = config.siteUrl + realPrefix + postPath;

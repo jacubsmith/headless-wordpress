@@ -13,7 +13,7 @@ import WordPressAcfMap from '../components/Layout/Flexible-Content/WordPressAcfM
 export default class Page extends Component {
 	render() {
 		const page = this.props.data.wordpressPage;
-		const { slug } = this.props.data.wordpressPage.slug;
+		const { slug } = this.props.data.wordpressPage;
 		const pageNode = this.props.data.wordpressPage;
 
 		return (
@@ -28,7 +28,7 @@ export default class Page extends Component {
 							__html: page.title,
 						}}
 					/>
-					{page.featured_media !== null ?
+					{page.featured_media !== null ? (
 						<Img
 							sizes={page.featured_media.localFile.childImageSharp.sizes}
 							alt={page.featured_media.alt_text}
@@ -39,19 +39,26 @@ export default class Page extends Component {
 								width: '100%',
 								height: '100%',
 							}}
-						/> : ''
-					}
-					<div dangerouslySetInnerHTML={{
-						__html: page.content,
-					}}
+						/>
+					) : (
+						''
+					)}
+					<div
+	dangerouslySetInnerHTML={{
+							__html: page.content,
+						}}
 					/>
-					{page.acf !== null && page.acf.flexible_content_page !== null ?
-						page.acf.flexible_content_page.map((item) => {
+					{page.acf !== null && page.acf.flexible_content_page !== null
+						? page.acf.flexible_content_page.map((item) => {
 							console.log(item);
 
 							switch (item.__typename) {
 							case 'WordPressAcf_blog_posts':
-								return <PostListing postEdges={this.props.data.allWordpressPost.edges} />;
+								return (
+									<PostListing
+										postEdges={this.props.data.allWordpressPost.edges}
+									/>
+								);
 
 							case 'WordPressAcf_text_block':
 								return <WordPressAcfTextBlock item={item} key={item.id} />;
@@ -71,7 +78,7 @@ export default class Page extends Component {
 						})
 						: ''}
 					<div className="post-meta">
-						<SocialLinks post={slug} postNode={pageNode} />
+						<SocialLinks postNode={pageNode} postPath={slug} />
 					</div>
 				</div>
 			</div>
@@ -80,69 +87,69 @@ export default class Page extends Component {
 }
 
 export const pageQuery = graphql`
-	query currentPageQuery($id: String!) {
-		wordpressPage(id: { eq: $id }) {
-			title
-			content
-			slug
-			featured_media {
-				localFile {
-					childImageSharp {
-						sizes(maxWidth: 1280) {
-							...GatsbyImageSharpSizes
-						}
-					}
-				}
-				alt_text
-			}
-			acf {
-				flexible_content_page {
-					__typename
+  query currentPageQuery($id: String!) {
+    wordpressPage(id: { eq: $id }) {
+      title
+      content
+      slug
+      featured_media {
+        localFile {
+          childImageSharp {
+            sizes(maxWidth: 1280) {
+              ...GatsbyImageSharpSizes
+            }
+          }
+        }
+        alt_text
+      }
+      acf {
+        flexible_content_page {
+          __typename
           ... on WordPressAcf_blog_posts {
             id
           }
-					... on WordPressAcf_wysiwyg {
-						editor
-					}
-					... on WordPressAcf_seo {
-						seo_title
-					}
-					... on WordPressAcf_map {
-						map {
-							address
-							lat
-							lng
-						}
-					}
-				}
-			}
-		}
-		allWordpressPost {
-			edges {
-				node {
-					id
-					slug
-					status
-					format
-					title
-					author {
-						name
-						avatar_urls {
-							wordpress_96
-						}
-					}
-					featured_media {
-						localFile {
-							childImageSharp {
-								sizes(maxWidth: 600) {
-									...GatsbyImageSharpSizes
-								}
-							}
-						}
-						alt_text
-        	}
-				}
-			}
-		}
-	}
+          ... on WordPressAcf_wysiwyg {
+            editor
+          }
+          ... on WordPressAcf_seo {
+            seo_title
+          }
+          ... on WordPressAcf_map {
+            map {
+              address
+              lat
+              lng
+            }
+          }
+        }
+      }
+    }
+    allWordpressPost {
+      edges {
+        node {
+          id
+          slug
+          status
+          format
+          title
+          author {
+            name
+            avatar_urls {
+              wordpress_96
+            }
+          }
+          featured_media {
+            localFile {
+              childImageSharp {
+                sizes(maxWidth: 600) {
+                  ...GatsbyImageSharpSizes
+                }
+              }
+            }
+            alt_text
+          }
+        }
+      }
+    }
+  }
 `;
