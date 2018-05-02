@@ -25,7 +25,7 @@ class SocialLinks extends Component {
 		console.log(postNode, postPath, mobile);
 
 		const post = postNode;
-		const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+		const realPrefix = config.pathPrefix === '' ? '/' : config.pathPrefix;
 		const url = config.siteUrl + realPrefix + postPath;
 
 		const iconSize = mobile ? 36 : 48;

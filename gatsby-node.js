@@ -52,14 +52,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 				// The Page ID is prefixed with 'PAGE_'
 				_.each(result.data.allWordpressPage.edges, (edge) => {
 					// Render index as home page if it has the right wordpress_id as set in options
-					// const templatePath =
-					//   edge.node.wordpress_id === homeID
-					//   	? 'pages/index.jsx'
-					//   	: 'templates/page.jsx';
-					const templatePath = 'templates/page.jsx';
+					const templatePath =
+					  edge.node.wordpress_id === homeID
+					  	? 'templates/index.jsx'
+					  	: 'templates/page.jsx';
 
 					const pageTemplate = path.resolve(`./src/${templatePath}`);
-					console.log(pageTemplate);
 
 					// Gatsby uses Redux to manage its internal state.
 					// Plugins and sites can use functions like "createPage"
